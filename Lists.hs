@@ -10,3 +10,11 @@ instance (Show a) => Show (Listr a) where
 instance (Show a) => Show (Listl a) where
     show Nill = "Nill"
     show (Snoc al a) = show al ++ "," ++ show a
+
+-- convert between two lists
+convert:: Listl a -> Listr a
+convert Nill = Nilr
+convert (Snoc al a) = snocr (convert al) a where
+    snocr:: Listr a -> a -> Listr a
+    snocr Nilr a = Cons a Nilr
+    snocr (Cons a' al) a = Cons a' (snocr al a)
