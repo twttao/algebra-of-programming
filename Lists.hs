@@ -23,3 +23,8 @@ convert (Snoc al a) = snocr (convert al) a where
 (+++):: Listl a -> Listl a -> Listl a
 (+++) al Nill = al
 (+++) al (Snoc al' a') = Snoc (al +++ al') a'
+
+-- map
+listR:: (a -> b) -> Listr a -> Listr b
+listR f Nilr = Nilr
+listR f (Cons a al) = Cons (f a) (listR f al)
