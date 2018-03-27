@@ -18,3 +18,8 @@ convert (Snoc al a) = snocr (convert al) a where
     snocr:: Listr a -> a -> Listr a
     snocr Nilr a = Cons a Nilr
     snocr (Cons a' al) a = Cons a' (snocr al a)
+
+-- concat
+(+++):: Listl a -> Listl a -> Listl a
+(+++) al Nill = al
+(+++) al (Snoc al' a') = Snoc (al +++ al') a'
