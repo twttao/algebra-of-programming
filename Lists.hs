@@ -47,3 +47,18 @@ catR la = \la2 -> foldR la2 Cons la
 
 concatR:: Listr (Listr a) -> Listr a
 concatR = foldR Nilr catR
+
+-- McCarthy conditional
+cond:: (a -> Bool) -> (a -> b) -> (a -> b) -> a -> b
+cond p f g a = if (p a) then f a else g a
+
+-- filter
+filterR:: (a -> Bool) -> Listr a -> Listr a
+filterR p = concatR.(listR (cond p wrap nilp)) where
+    wrap:: a -> Listr a
+    wrap a = Cons a Nilr
+    nilp:: a -> Listr a
+    nilp _ = Nilr
+
+filterR':: (a -> Bool) -> Listr a -> Listr a
+filterR' p = foldR Nilr (\a al -> if (p a) then (Cons a al) else al)
