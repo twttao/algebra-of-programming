@@ -73,3 +73,11 @@ instance (Show a) => Show (Listrp a) where
 instance (Show a) => Show (Listlp a) where
     show (Wlp a) = "Wlp " ++ show a
     show (Snocp al a) = show al ++ "," ++ show a
+
+-- folds
+foldrp:: (a -> b) -> (a -> b -> b) -> Listrp a -> b
+foldrp f g (Wrp a) = f a    -- f replaces Wrp
+foldrp f g (Consp a al) = g a (foldrp f g al)       -- g replaces Consp
+
+headp:: Listrp a -> a
+headp = foldrp id (\a _ -> a)
