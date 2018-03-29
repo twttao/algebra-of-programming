@@ -62,3 +62,14 @@ filterR p = concatR.(listR (cond p wrap nilp)) where
 
 filterR':: (a -> Bool) -> Listr a -> Listr a
 filterR' p = foldR Nilr (\a al -> if (p a) then (Cons a al) else al)
+
+-- non-empty lists
+data Listrp a = Wrp a | Consp a (Listrp a)
+data Listlp a = Wlp a | Snocp (Listlp a) a
+
+instance (Show a) => Show (Listrp a) where
+    show (Wrp a) = "Wrp " ++ show a
+    show (Consp a al) = show a ++ "," ++ show al
+instance (Show a) => Show (Listlp a) where
+    show (Wlp a) = "Wlp " ++ show a
+    show (Snocp al a) = show al ++ "," ++ show a
