@@ -4,7 +4,9 @@ module Functors where
 -- two mappings: objects to objects; arrows to arrows
 -- properties:
 -- 1. F f: F A <- F B  if  f: A <- B
--- 2.(preservation of identity) F(id_A) = id_{F A}  and  F(f.g) = (F f).(F g)
+-- 2.(preservation of identity & preservation of functional composition)
+--   F(id_A) = id_{F A}  and  F(f.g) = (F f).(F g)
+
 -- ex.:
 -- 1.(identity functor) id: C <- C
 -- 2. K_A: A <- B
